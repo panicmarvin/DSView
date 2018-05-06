@@ -355,8 +355,10 @@ void DeviceOptions::mode_check()
 void DeviceOptions::channel_check()
 {
     QRadioButton* sc=dynamic_cast<QRadioButton*>(sender());
+    QString text = sc->text();
+    text.remove('&');
     if(sc != NULL)
-        _dev_inst->set_config(NULL, NULL, SR_CONF_CHANNEL_MODE, g_variant_new_string(sc->text().toUtf8().data()));
+	_dev_inst->set_config(NULL, NULL, SR_CONF_CHANNEL_MODE, g_variant_new_string(text.toUtf8().data()));
     setup_probes();
 }
 
